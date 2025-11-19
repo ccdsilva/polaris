@@ -1,0 +1,10 @@
+node_modules/
+backend/data/database.json
+data/
+*.db
+*.sqlite
+*.sqlite3
+.DS_Store
+.env
+*.log
+

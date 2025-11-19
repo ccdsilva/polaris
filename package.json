@@ -1,0 +1,23 @@
+{
+  "name": "vis3d-link-analysis",
+  "version": "1.0.0",
+  "description": "Ferramenta de análise de vínculos 3D com time series",
+  "type": "module",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "init-db": "node backend/database/init_db.js",
+    "generate-data": "node backend/data/generate_mock.js"
+  },
+  "keywords": ["three.js", "3d", "graph", "time-series"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
+
