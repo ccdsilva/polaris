@@ -126,15 +126,59 @@ app.get('/api/events', (req, res) => {
     }
 });
 
+// Endpoint: Comparar vínculos entre múltiplos usuários
+app.get('/api/compare-links', (req, res) => {
+    try {
+        const { userIds, end } = req.query;
+        
+        if (!userIds) {
+            return res.status(400).json({ error: 'userIds parameter is required' });
+        }
+
+        // Parse userIds - pode ser uma string separada por vírgulas ou array
+        let userIdArray;
+        if (typeof userIds === 'string') {
+            userIdArray = userIds.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id));
+        } else if (Array.isArray(userIds)) {
+            userIdArray = userIds.map(id => parseInt(id)).filter(id => !isNaN(id));
+        } else {
+            return res.status(400).json({ error: 'userIds must be a comma-separated string or array' });
+        }
+
+        if (userIdArray.length < 2) {
+            return res.status(400).json({ error: 'At least 2 user IDs are required' });
+        }
+
+        const comparison = db.compareUserLinks(userIdArray, end || null);
+        res.json(comparison);
+    } catch (error) {
+        console.error('Error comparing user links:', error);
+        res.status(500).json({ error: error.message || 'Failed to compare user links' });
+    }
+});
+
 // Rota padrão - servir index.html
 app.get('/', (req, res) => {
     res.sendFile(path.join(frontendPath, 'index.html'));
 });
 
 // Iniciar servidor
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
     console.log(`Frontend served from: ${frontendPath}`);
+});
+
+server.on('error', (error) => {
+    if (error.code === 'EADDRINUSE') {
+        console.error(`\n❌ Erro: A porta ${PORT} já está em uso.`);
+        console.error('Por favor, encerre o processo que está usando a porta 3000.');
+        console.error('No Windows, você pode usar: netstat -ano | findstr :3000');
+        console.error('E depois: taskkill /PID <PID> /F\n');
+        process.exit(1);
+    } else {
+        console.error('Erro ao iniciar servidor:', error);
+        process.exit(1);
+    }
 });
 
 // Graceful shutdown

@@ -43,7 +43,12 @@ class App {
             const person = e.detail;
             this.graphRenderer.highlightNode(person.id, true);
             
-            // Focar câmera no nó (opcional)
+            // Focar câmera no nó automaticamente
+            setTimeout(() => {
+                this.graphRenderer.focusOnPerson(person.id);
+            }, 300);
+            
+            // Remover highlight após alguns segundos
             setTimeout(() => {
                 this.graphRenderer.highlightNode(person.id, false);
             }, 3000);
@@ -70,6 +75,7 @@ class App {
 
             // Carregar relacionamentos até o tempo inicial
             if (this.currentTime) {
+                this.ui.setCurrentTime(this.currentTime);
                 await this.loadRelationshipsForTime(this.currentTime);
             }
 
@@ -103,6 +109,7 @@ class App {
 
     async onTimeChange(time) {
         this.currentTime = time;
+        this.ui.setCurrentTime(time);
         await this.loadRelationshipsForTime(time);
     }
 

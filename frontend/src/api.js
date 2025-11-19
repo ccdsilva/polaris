@@ -52,5 +52,16 @@ export class ApiClient {
         if (!response.ok) throw new Error('Failed to fetch events');
         return await response.json();
     }
+
+    static async compareUserLinks(userIds, endTime = null) {
+        const userIdsParam = Array.isArray(userIds) ? userIds.join(',') : userIds;
+        let url = `${API_BASE}/compare-links?userIds=${encodeURIComponent(userIdsParam)}`;
+        if (endTime) {
+            url += `&end=${encodeURIComponent(endTime)}`;
+        }
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Failed to compare user links');
+        return await response.json();
+    }
 }
 

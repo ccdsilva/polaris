@@ -162,6 +162,108 @@ class JSONDatabase {
             });
     }
 
+    // Comparar vínculos entre múltiplos usuários
+    compareUserLinks(userIds, endTime = null) {
+        if (!Array.isArray(userIds) || userIds.length < 2) {
+            throw new Error('At least 2 user IDs are required for comparison');
+        }
+
+        const queryEnd = endTime ? new Date(endTime) : new Date('9999-12-31');
+        
+        // Buscar todos os relacionamentos de cada usuário até o tempo especificado
+        const userRelationships = {};
+        const allConnections = new Map(); // Map<otherPersonId, Set<userId>>
+
+        userIds.forEach(userId => {
+            const relationships = this.data.relationships
+                .filter(r => {
+                    const start = new Date(r.start_time);
+                    const end = r.end_time ? new Date(r.end_time) : new Date('9999-12-31');
+                    return start <= queryEnd && end >= queryEnd && 
+                           (r.person1_id === userId || r.person2_id === userId);
+                })
+                .map(r => {
+                    const otherId = r.person1_id === userId ? r.person2_id : r.person1_id;
+                    const otherPerson = this.getPersonById(otherId);
+                    return {
+                        ...r,
+                        other_person_id: otherId,
+                        other_person_name: otherPerson?.name || 'Unknown',
+                        direction: r.person1_id === userId ? 'outgoing' : 'incoming'
+                    };
+                });
+
+            userRelationships[userId] = relationships;
+
+            // Mapear conexões
+            relationships.forEach(rel => {
+                const otherId = rel.other_person_id;
+                if (!allConnections.has(otherId)) {
+                    allConnections.set(otherId, new Set());
+                }
+                allConnections.get(otherId).add(userId);
+            });
+        });
+
+        // Identificar conexões comuns e únicas
+        const commonConnections = [];
+        const uniqueConnections = {};
+
+        allConnections.forEach((userSet, otherPersonId) => {
+            const otherPerson = this.getPersonById(otherPersonId);
+            const connectionInfo = {
+                person_id: otherPersonId,
+                person_name: otherPerson?.name || 'Unknown',
+                connected_to: Array.from(userSet)
+            };
+
+            if (userSet.size === userIds.length) {
+                // Conexão comum a todos
+                commonConnections.push(connectionInfo);
+            } else {
+                // Conexão única - adicionar aos usuários específicos
+                userSet.forEach(userId => {
+                    if (!uniqueConnections[userId]) {
+                        uniqueConnections[userId] = [];
+                    }
+                    uniqueConnections[userId].push(connectionInfo);
+                });
+            }
+        });
+
+        // Estatísticas
+        const stats = {
+            total_common: commonConnections.length,
+            total_unique: Object.values(uniqueConnections).reduce((sum, arr) => sum + arr.length, 0),
+            per_user: {}
+        };
+
+        userIds.forEach(userId => {
+            const person = this.getPersonById(userId);
+            stats.per_user[userId] = {
+                name: person?.name || 'Unknown',
+                total_connections: userRelationships[userId]?.length || 0,
+                unique_connections: uniqueConnections[userId]?.length || 0,
+                common_connections: commonConnections.length
+            };
+        });
+
+        return {
+            users: userIds.map(id => {
+                const person = this.getPersonById(id);
+                return {
+                    id,
+                    name: person?.name || 'Unknown',
+                    email: person?.email || null
+                };
+            }),
+            common_connections: commonConnections,
+            unique_connections: uniqueConnections,
+            all_relationships: userRelationships,
+            stats: stats
+        };
+    }
+
     // Admin methods for data generation
     clearAll() {
         this.data = { people: [], relationships: [], events: [] };

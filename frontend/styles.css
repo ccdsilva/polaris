@@ -226,3 +226,354 @@ body {
     background: #4a4a5a;
 }
 
+/* Comparação de vínculos */
+.comparison-panel {
+    padding-top: 20px;
+    border-top: 1px solid #3a3a4a;
+    margin-top: 20px;
+}
+
+.comparison-panel h3 {
+    margin-bottom: 15px;
+    color: #4a9eff;
+    font-size: 1em;
+}
+
+.comparison-controls {
+    margin-bottom: 15px;
+}
+
+.selected-users {
+    margin-bottom: 10px;
+}
+
+.selected-users label {
+    display: block;
+    font-size: 0.85em;
+    color: #a0a0a0;
+    margin-bottom: 8px;
+}
+
+#selected-users-list {
+    min-height: 40px;
+    max-height: 120px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.selected-user-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+    margin-bottom: 5px;
+    background: #1a1a2a;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+
+.remove-user-btn {
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    transition: background 0.2s;
+}
+
+.remove-user-btn:hover {
+    background: #cc3333;
+}
+
+#compare-btn, #clear-comparison-btn {
+    padding: 8px 16px;
+    background: #4a9eff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background 0.2s;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+#compare-btn:hover:not(:disabled) {
+    background: #3a8eef;
+}
+
+#compare-btn:disabled {
+    background: #2a2a3a;
+    color: #808080;
+    cursor: not-allowed;
+}
+
+#clear-comparison-btn {
+    background: #6a6a7a;
+}
+
+#clear-comparison-btn:hover {
+    background: #5a5a6a;
+}
+
+.comparison-results {
+    max-height: 400px;
+    overflow-y: auto;
+    font-size: 0.85em;
+    margin-top: 15px;
+}
+
+.comparison-summary {
+    background: #1a1a2a;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.comparison-summary h4 {
+    color: #4a9eff;
+    margin-bottom: 10px;
+    font-size: 1em;
+}
+
+.comparison-summary p {
+    margin-bottom: 5px;
+}
+
+.comparison-stats {
+    background: #1a1a2a;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.comparison-stats h4 {
+    color: #4a9eff;
+    margin-bottom: 10px;
+    font-size: 1em;
+}
+
+.user-stats-item {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #2a2a3a;
+}
+
+.user-stats-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.user-stats-item strong {
+    color: #4a9eff;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.user-stats-item ul {
+    list-style: none;
+    padding-left: 15px;
+    margin: 0;
+}
+
+.user-stats-item li {
+    margin-bottom: 3px;
+    color: #c0c0c0;
+}
+
+.common-connections, .unique-connections {
+    background: #1a1a2a;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.common-connections h4, .unique-connections h4 {
+    color: #4a9eff;
+    margin-bottom: 10px;
+    font-size: 1em;
+}
+
+.connections-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.connections-list li {
+    padding: 6px 10px;
+    margin-bottom: 5px;
+    background: #2a2a3a;
+    border-radius: 4px;
+    color: #e0e0e0;
+}
+
+.user-unique-connections {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #2a2a3a;
+}
+
+.user-unique-connections:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.user-unique-connections strong {
+    color: #4a9eff;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.empty-message {
+    color: #808080;
+    font-style: italic;
+}
+
+.selected-badge {
+    float: right;
+    color: #4a9eff;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+/* Ajuda de navegação */
+.navigation-help {
+    padding-top: 20px;
+    border-top: 1px solid #3a3a4a;
+    margin-top: 20px;
+}
+
+.navigation-help h3 {
+    margin-bottom: 15px;
+    color: #4a9eff;
+    font-size: 1em;
+}
+
+.help-content {
+    font-size: 0.8em;
+    color: #a0a0a0;
+}
+
+.help-content p {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: #c0c0c0;
+}
+
+.help-content ul {
+    list-style: none;
+    padding-left: 15px;
+    margin-bottom: 10px;
+}
+
+.help-content li {
+    margin-bottom: 3px;
+    padding-left: 10px;
+    position: relative;
+}
+
+.help-content li:before {
+    content: "•";
+    color: #4a9eff;
+    position: absolute;
+    left: 0;
+}
+
+.comparison-ai-panel {
+    background: #141427;
+    border: 1px solid #2a2a3a;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+.comparison-ai-panel label {
+    display: block;
+    font-size: 0.85em;
+    color: #a0a0a0;
+    margin-bottom: 8px;
+}
+
+#ai-query-input {
+    width: 100%;
+    min-height: 70px;
+    background: #1c1c2c;
+    color: #e0e0e0;
+    border: 1px solid #2f2f40;
+    border-radius: 4px;
+    padding: 8px 10px;
+    resize: vertical;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+#ai-query-input:focus {
+    outline: none;
+    border-color: #4a9eff;
+    box-shadow: 0 0 0 1px rgba(74, 158, 255, 0.2);
+}
+
+#ai-query-btn {
+    width: 100%;
+    padding: 8px 16px;
+    background: #4a9eff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background 0.2s;
+    margin-bottom: 10px;
+}
+
+#ai-query-btn:hover:not(:disabled) {
+    background: #3a8eef;
+}
+
+#ai-query-btn:disabled {
+    background: #2a2a3a;
+    color: #808080;
+    cursor: not-allowed;
+}
+
+.ai-response {
+    background: #1a1a2a;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 0.85em;
+    min-height: 60px;
+    border: 1px dashed #2f2f40;
+}
+
+.ai-response-bubble {
+    background: #202036;
+    border-radius: 6px;
+    padding: 12px;
+    border: 1px solid #2f3f5f;
+}
+
+.ai-question {
+    color: #e0e0e0;
+    margin-bottom: 8px;
+}
+
+.ai-insight {
+    margin-top: 8px;
+    color: #b0d2ff;
+}
+
+.ai-disclaimer {
+    margin-top: 10px;
+    color: #8080a0;
+    font-size: 0.75em;
+    font-style: italic;
+}
+

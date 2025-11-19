@@ -47,6 +47,47 @@
             <input type="text" id="search-input" placeholder="Nome da pessoa...">
             <div id="search-results"></div>
         </div>
+        
+        <div class="comparison-panel">
+            <h3>Comparar Vínculos</h3>
+            <div class="comparison-ai-panel">
+                <label for="ai-query-input">Pergunte ao "chatbot" (IA complementar)</label>
+                <textarea id="ai-query-input" placeholder="Ex.: Quais hipóteses adicionais posso investigar sobre estes usuários?"></textarea>
+                <button id="ai-query-btn">Perguntar ao Chatbot</button>
+                <div id="ai-response" class="ai-response empty-message">
+                    Utilize o chatbot para obter insights complementares sobre os vínculos selecionados.
+                </div>
+            </div>
+            <div class="comparison-controls">
+                <div class="selected-users">
+                    <label>Usuários selecionados:</label>
+                    <div id="selected-users-list"></div>
+                </div>
+                <button id="compare-btn" disabled>Comparar</button>
+                <button id="clear-comparison-btn">Limpar</button>
+            </div>
+            <div id="comparison-results" class="comparison-results"></div>
+        </div>
+        
+        <div class="navigation-help">
+            <h3>Navegação</h3>
+            <div class="help-content">
+                <p><strong>Mouse:</strong></p>
+                <ul>
+                    <li>Arrastar: Rotacionar</li>
+                    <li>Scroll: Zoom</li>
+                    <li>Clique: Selecionar nó</li>
+                    <li>Duplo clique: Focar no nó</li>
+                </ul>
+                <p><strong>Teclado:</strong></p>
+                <ul>
+                    <li>WASD / Setas: Mover câmera</li>
+                    <li>Q/E: Zoom in/out</li>
+                    <li>R: Centralizar gráfico</li>
+                    <li>Espaço: Focar no selecionado</li>
+                </ul>
+            </div>
+        </div>
     </div>
     
     <script type="importmap">
